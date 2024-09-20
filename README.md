@@ -18,6 +18,7 @@ npm i --save @grpc/grpc-js @grpc/proto-loader
 npm i --save ts-proto
 sudo apt install -y protobuf-compiler
 npx nest g lib common
+npx nest g resource users apps/api-gateway/src
 ```
 
 ## Codegen

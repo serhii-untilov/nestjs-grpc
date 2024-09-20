@@ -1,17 +1,20 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto, UpdateUserDto, User } from '@app/common';
+import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
+import { CreateUserDto, PaginationDto, UpdateUserDto, User, Users } from '@app/common';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable()
-export class UsersService {
+export class UsersService implements OnModuleInit {
     private readonly users: User[] = [];
     private _nextId: number = 0;
+
+    onModuleInit() {}
 
     public get nextId() {
         this._nextId++;
         return this._nextId;
     }
 
-    create(createUserDto: CreateUserDto) {
+    create(createUserDto: CreateUserDto): User {
         const user: User = {
             ...createUserDto,
             refreshToken: '',
@@ -23,19 +26,41 @@ export class UsersService {
         return user;
     }
 
-    findAll() {
-        return `This action returns all users`;
+    findAll(): Users {
+        return { users: this.users };
     }
 
     findOne(id: number) {
-        return `This action returns a #${id} user`;
+        return this.users.find((o) => o.id === id);
     }
 
-    update(id: number, updateUserDto: UpdateUserDto) {
-        return `This action updates a #${id} user`;
+    update(id: number, updateUserDto: UpdateUserDto): User {
+        const index = this.users.findIndex((o) => o.id === id);
+        if (index < 0) throw new NotFoundException(`User not found by id: ${id}.`);
+        this.users[index] = { ...this.users[index], ...updateUserDto, id };
+        return this.users[index];
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} user`;
+    remove(id: number): User {
+        const index = this.users.findIndex((o) => o.id === id);
+        if (index < 0) throw new NotFoundException(`User not found by id: ${id}.`);
+        const deleted = this.users.splice(index, 1);
+        return deleted[0];
+    }
+
+    queryUsers(paginationDtoStream: Observable<PaginationDto>): Observable<Users> {
+        const subject = new Subject<Users>();
+        const onNext = (paginationDto: PaginationDto) => {
+            const start = paginationDto.page * paginationDto.skip;
+            subject.next({
+                users: this.users.slice(start, start + paginationDto.skip),
+            });
+        };
+        const onComplete = () => subject.complete();
+        paginationDtoStream.subscribe({
+            next: onNext,
+            complete: onComplete,
+        });
+        return subject.asObservable();
     }
 }

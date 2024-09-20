@@ -7,12 +7,15 @@
 ## Project setup
 
 ```bash
-sudo npm i -g @nestjs/cli@latest
+npm i -g @nestjs/cli@latest
 npx nest new nestjs-grpc
 cd nestjs-grpc
 npx nest g app auth
 mv ./apps/nestjs-grpc ./apps/api-gateway
 npx nest g resource users
+npm i --save @nestjs/microservices
+npm i --save @grpc/grpc-js @grpc/proto-loader
+npm i --save ts-proto
 
 ```
 

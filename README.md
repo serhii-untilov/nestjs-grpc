@@ -12,6 +12,7 @@ npx nest new nestjs-grpc
 cd nestjs-grpc
 npx nest g app auth
 mv ./apps/nestjs-grpc ./apps/api-gateway
+npx nest g resource users
 
 ```
 

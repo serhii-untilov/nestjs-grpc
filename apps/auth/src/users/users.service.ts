@@ -1,11 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto, UpdateUserDto, User } from '@app/common';
 
 @Injectable()
 export class UsersService {
+    private readonly users: User[] = [];
+    private _nextId: number = 0;
+
+    public get nextId() {
+        this._nextId++;
+        return this._nextId;
+    }
+
     create(createUserDto: CreateUserDto) {
-        return 'This action adds a new user';
+        const user: User = {
+            ...createUserDto,
+            refreshToken: '',
+            isActive: true,
+            socialMedia: {},
+            id: this.nextId,
+        };
+        this.users.push(user);
+        return user;
     }
 
     findAll() {

@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package auth;
 
 service UsersService {
@@ -48,6 +50,6 @@ message User {
 }
 
 message SocialMedia {
-    string twitterUri = 1;
-    string fbUri = 2;
+    google.protobuf.StringValue twitterUri = 1;
+    google.protobuf.StringValue fbUri = 2;
 }

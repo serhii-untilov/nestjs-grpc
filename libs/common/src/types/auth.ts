@@ -48,8 +48,8 @@ export interface User {
 }
 
 export interface SocialMedia {
-  twitterUri: string;
-  fbUri: string;
+  twitterUri: string | undefined;
+  fbUri: string | undefined;
 }
 
 export const AUTH_PACKAGE_NAME = "auth";

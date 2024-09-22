@@ -59,3 +59,4 @@ $ npm run test:cov
 [**gRPC** - NestJS gRPC Microservices Tutorial - YouTube](https://www.youtube.com/watch?v=UkWcjVWs2UQ)
 [**gRPC** - NestJS gRPC Microservices Tutorial - GitHub](https://github.com/mguay22/nestjs-grpc/tree/main)
 [**gRPC** - Getting hands-on gRPC client generation for typescript](https://medium.com/@heartfor.it/getting-hands-on-grpc-client-generation-for-typescript-fed50b4ebe2b)
+[**Protobuf** - Protobuf — не только сериализация. Генерация кода и другие прикладные аспекты](https://dou.ua/lenta/articles/protobuf-guide/)

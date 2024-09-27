@@ -6,6 +6,9 @@ plugins:
       out: ./libs/common/src/types
       strategy: all
       opt:
-          - nestJs=true
+          - outputServices=nice-grpc,outputServices=generic-definitions
+          - useExactTypes=true
+          - useOptionals=all
+          - addGrpcMetadata=true
 inputs:
     - directory: ./proto

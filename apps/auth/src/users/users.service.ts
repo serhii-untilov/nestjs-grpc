@@ -17,8 +17,6 @@ export class UsersService implements OnModuleInit {
     create(createUserDto: CreateUserDto): User {
         const user: User = {
             ...createUserDto,
-            refreshToken: '',
-            isActive: true,
             socialMedia: {},
             id: this.nextId,
         };

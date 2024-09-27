@@ -20,6 +20,7 @@ sudo apt install -y protobuf-compiler
 npm install @bufbuild/buf
 npx nest g lib common
 npx nest g resource users apps/api-gateway/src
+npm i crypto
 ```
 
 ## Codegen

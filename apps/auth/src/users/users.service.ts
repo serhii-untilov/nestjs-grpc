@@ -1,24 +1,20 @@
 import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { CreateUserDto, PaginationDto, UpdateUserDto, User, Users } from '@app/common';
 import { Observable, Subject } from 'rxjs';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class UsersService implements OnModuleInit {
     private readonly users: User[] = [];
-    private _nextId: number = 0;
 
     onModuleInit() {}
-
-    public get nextId() {
-        this._nextId++;
-        return this._nextId;
-    }
 
     create(createUserDto: CreateUserDto): User {
         const user: User = {
             ...createUserDto,
+            subscribed: false,
             socialMedia: {},
-            id: this.nextId,
+            id: randomUUID(),
         };
         this.users.push(user);
         return user;
@@ -28,18 +24,18 @@ export class UsersService implements OnModuleInit {
         return { users: this.users };
     }
 
-    findOne(id: number) {
+    findOne(id: string) {
         return this.users.find((o) => o.id === id);
     }
 
-    update(id: number, updateUserDto: UpdateUserDto): User {
+    update(id: string, updateUserDto: UpdateUserDto): User {
         const index = this.users.findIndex((o) => o.id === id);
         if (index < 0) throw new NotFoundException(`User not found by id: ${id}.`);
         this.users[index] = { ...this.users[index], ...updateUserDto, id };
         return this.users[index];
     }
 
-    remove(id: number): User {
+    remove(id: string): User {
         const index = this.users.findIndex((o) => o.id === id);
         if (index < 0) throw new NotFoundException(`User not found by id: ${id}.`);
         const deleted = this.users.splice(index, 1);

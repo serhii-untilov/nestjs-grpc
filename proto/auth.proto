@@ -17,12 +17,12 @@ message PaginationDto {
 }
 
 message UpdateUserDto {
-    int32 id = 1;
+    string id = 1;
     SocialMedia socialMedia = 2;
 }
 
 message FindOneUserDto {
-    int32 id = 1;
+    string id = 1;
 }
 
 message Empty {}
@@ -38,11 +38,12 @@ message CreateUserDto {
 }
 
 message User {
-    int32 id = 1;
+    string id = 1;
     string name = 2;
     string email = 3;
     string password = 4;
-    SocialMedia socialMedia = 7;
+    bool subscribed = 5;
+    SocialMedia socialMedia = 6;
 }
 
 message SocialMedia {

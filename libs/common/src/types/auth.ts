@@ -16,12 +16,12 @@ export interface PaginationDto {
 }
 
 export interface UpdateUserDto {
-  id: number;
+  id: string;
   socialMedia: SocialMedia | undefined;
 }
 
 export interface FindOneUserDto {
-  id: number;
+  id: string;
 }
 
 export interface Empty {
@@ -38,10 +38,11 @@ export interface CreateUserDto {
 }
 
 export interface User {
-  id: number;
+  id: string;
   name: string;
   email: string;
   password: string;
+  subscribed: boolean;
   socialMedia: SocialMedia | undefined;
 }
 

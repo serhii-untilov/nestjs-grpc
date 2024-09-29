@@ -7,7 +7,12 @@ import { randomUUID } from 'crypto';
 export class UsersService implements OnModuleInit {
     private readonly users: User[] = [];
 
-    onModuleInit() {}
+    onModuleInit() {
+        for (let i = 0; i < 100; i++) {
+            const name = String(randomUUID());
+            this.create({ name, email: `${name}@mail.com`, password: '1' });
+        }
+    }
 
     create(createUserDto: CreateUserDto): User {
         const user: User = {

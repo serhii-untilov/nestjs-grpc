@@ -33,12 +33,17 @@ protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./ --ts_p
 
 ```bash
 # development
+$ npm run codegen
 $ npm run start
 
 # watch mode
-$ npm run start:dev
+$ npm run codegen
+$ npm run start:dev api-gateway
+$ npm run start:dev auth
 
 # production mode
+$ npm run codegen
+$ npm run build
 $ npm run start:prod
 ```
 

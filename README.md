@@ -34,7 +34,8 @@ protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./ --ts_p
 ```bash
 # development
 $ npm run codegen
-$ npm run start
+$ npm run start api-gateway
+$ npm run start auth
 
 # watch mode
 $ npm run codegen
